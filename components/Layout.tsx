@@ -95,6 +95,37 @@ const HeaderStyles = styled.header`
     }
   }
 
+  ul {
+    list-style: none;
+  }
+
+  ul {
+    background: white;
+    height: min-content;
+    width: min-content;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    text-align: center;
+    padding: 8px 24px 24px;
+    border-left: 1px solid var(--primary-200);
+    border-bottom: 1px solid var(--primary-200);
+    transition: all ease 0.2s;
+
+    button {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 2rem;
+      background-color: ${({ theme }) => theme.primary[100]};
+      line-height: 1;
+    }
+  }
+
+  ul.closed {
+    right: -100px;
+  }
+
   @media (max-width: 500px) {
     height: 48px;
 

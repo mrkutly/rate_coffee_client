@@ -20,6 +20,11 @@ export default class MyDocument extends Document {
           <>
             {initialProps.styles}
             {sheet.getStyleElement()}
+            <style global jsx>{`
+              body {
+                overflow: hidden;
+              }
+            `}</style>
           </>
         ),
       };
