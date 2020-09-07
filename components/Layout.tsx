@@ -1,9 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 import Link from "./Link";
 import { TertiaryButton } from "waskode";
 
 const links = [
+  {
+    path: "/",
+    name: "home",
+  },
   {
     path: "/about",
     name: "about",
@@ -11,11 +16,20 @@ const links = [
 ];
 
 const Layout = ({ children }) => {
+  const { pathname } = useRouter();
   const [navOpen, setNavOpen] = useState(false);
+
   return (
     <>
+      <style global jsx>{`
+        body {
+          overflow: hidden;
+        }
+      `}</style>
       <HeaderStyles>
-        <h1>rate_coffee</h1>
+        <Link href="/">
+          <h1>rate_coffee</h1>
+        </Link>
         <nav>
           <TertiaryButton onClick={() => setNavOpen(!navOpen)}>
             <div
@@ -27,7 +41,12 @@ const Layout = ({ children }) => {
           <ul className={navOpen ? "open" : "closed"}>
             {links.map((l, idx) => (
               <li key={`${l.name}-link-${idx}`}>
-                <Link href={l.path}>{l.name}</Link>
+                <Link
+                  href={l.path}
+                  className={pathname === l.path ? "active" : ""}
+                >
+                  {l.name}
+                </Link>
               </li>
             ))}
           </ul>
@@ -51,6 +70,7 @@ const HeaderStyles = styled.header`
     margin: 0;
     width: min-content;
     background: white;
+    font-size: 2rem;
   }
 
   .nav-icon {
@@ -97,6 +117,10 @@ const HeaderStyles = styled.header`
 
   ul {
     list-style: none;
+  }
+
+  li {
+    margin: 4px 0;
   }
 
   ul {
